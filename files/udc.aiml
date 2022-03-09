@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+  
+    <category>
+          <pattern>*</pattern>
+             <template>I have no answer for that, please check your spelling and ensure your query is simple. Do you need any help on what to ask me or how to ask me questions?
+             <reply>
+                <text>I need help on the toilets.</text>
+                <postback>CHOOSEYES</postback>
+             </reply>
+             <reply>
+                <text>I need help on having a conversation.</text>
+                <postback>CHOOSEYES2</postback>
+             </reply>
+             <reply>
+                 <text>No, it's okay!</text>
+                 <postback>CHOOSENO</postback>
+             </reply>
+         </template>
+  </category>
+  
+  <category>
+      <pattern>CHOOSEYES</pattern>
+      <template>
+        You can ask me: Where the toilets are/where are toilets in any building, what buildings have toilets, where clean toilets are, when can/should you go, what time you should go for clean toilets and who do I ask in class.
+        <think><set name="topic">TOILETS</set></think>
+      </template>
+  </category>
+  
+    <category>
+      <pattern>CHOOSEYES2</pattern>
+      <template>After greeting the bot, you can reply to its question with your favourite ____.</template>
+  </category>
+  
+  <category>
+      <pattern>CHOOSENO</pattern>
+      <template>You can access help anytime by typing "Help".</template>
+  </category>
+  
+  <category>
+        <pattern>HI *</pattern>
+        <template><srai>Hello <star/></srai></template>
+    </category>
+    
+  <category>
+        <pattern>Hey *</pattern>
+        <template><srai>Hello <star/></srai></template>
+    </category>
+
+    <category>
+          <pattern>Hello _</pattern>
+             <template>
+                 <random>
+                     <li>Hi! What's your favourite food?</li>
+                     <li>Hello! What's your favourite country!</li>
+                     <li>Hey! What's your favourite hobby?</li>
+                 </random>
+             <think><set name="topic">TALK</set></think>
+         </template>
+    </category>
+    
+    <topic name="TALK">
+        
+          <category>
+            <pattern>*</pattern>
+            <template>
+                <formal><star/></formal>? That seems pretty nice! Let's talk about the toilets. 
+            <think><set name="topic">TOILETS</set></think>
+            </template>
+        </category>
+    
+    </topic>
+
+    <category>
+        <pattern>WHERES *</pattern>
+        <template><srai>WHERE <star/></srai></template>
+    </category>
+    
+    <category>
+        <pattern>WHERES</pattern>
+        <template><srai>WHERE</srai></template>
+    </category>
+
+    <category>
+        <pattern>WHAT TIME *</pattern>
+        <template><srai>WHEN <star/></srai></template>
+    </category>
+
+    <category>
+        <pattern>* LATER *</pattern>
+        <template><srai><star/> LATE <star index="2"/></srai></template>
+    </category>
+
+    <topic name="TOILETS">
+        
+        <category>
+            <pattern>WHERE _</pattern>
+            <template>There are toilets in the Ardmara, the Hermitage building and St Marcellins Hall. There are no toilets in the Le Rosey, Fourviere or Montagne buildings.</template>
+        </category>
+        
+        <category>
+            <pattern>_ CLEAN TOILETS</pattern>
+            <template>Clean toilets are further away from common areas, so something such as the toilets above student services will be good.</template>
+        </category>
+        
+        <category>
+            <pattern>_ DIRTY TOILETS</pattern>
+            <template>Dirty toilets are closer to common, more travelled areas. This means that later in the day the toilets in the middle of the Hermitage are likely to be dirtier.</template>
+        </category>
+        
+        <category>
+            <pattern>_ CLEAN TOILETS</pattern>
+            <template>Clean toilets are further away from highly travelled areas, so less people will be using them.</template>
+        </category>
+        
+        <category>
+            <pattern>WHEN _</pattern>
+            <template>You can go at recess, lunch, before and after school and between classes as long as you aren't late to class.</template>
+        </category>
+        
+        
+        <category>
+            <pattern>WHEN SHOULD _</pattern>
+            <template>You should go as early in the day as possible to get a cleaner toilet.</template>
+        </category>
+        
+        <category>
+            <pattern>_ LATER</pattern>
+            <template>You can, but it is a good idea to go as early in the day as possible to get a cleaner toilet.</template>
+        </category>
+        
+        <category>
+            <pattern>_ EARLIER</pattern>
+            <template>Yes, you should go as early in the day as possible to get a cleaner toilet.</template>
+        </category>
+    
+        <category>
+            <pattern>* TOILETS IN THE *</pattern>
+            <template>
+                <think><set name="testbuilding"><star index="2"/></set></think>
+                <condition name="testbuilding">
+                    <li value="MONTAGNE _">No. Nearest toilets are in the Ardmara building.</li>
+                    <li value="FOURVIERE BUILDING">No. The nearest toilets are in the Ardmara building.</li>
+                    <li value="ART _">No. The nearest toilets are in the Ardmara building.</li>
+                    <li value="HALL">Yes, near the change rooms.</li>
+                    <li value="GYM">Yes, near the change rooms.</li>
+                    <li value="ST _">Yes, near the change rooms.</li>
+                    <li value="LE ROSEY _">No. The nearest toilets are in the Ardmara building or the hall.</li>
+                    <li value="WOOD _">No. The nearest toilets are in the Ardmara building or the hall.</li>
+                    <li value="ARDMARA _">Yes, they are next to the stairs on both floors.</li>
+                    <li value="HERMITAGE">Yes. There are 2 above student services on the second floor and on the ground floor in the centre of the building.</li>
+                </condition>
+            </template>
+        </category>
+        
+        <category>
+            <pattern>_ LATE</pattern>
+            <template>Go to a toilet that is further away from common areas, such as the ones above student services. Toilets that are closer are dirtier later in the day because more people use them.</template>
+        </category>
+        
+        <category>
+            <pattern>_ CLASS</pattern>
+            <template>Ask your teacher before you go.</template>
+        </category>
+        
+        <category>
+            <pattern>WHO _</pattern>
+            <template>Ask your teacher before you go.</template>
+        </category>
+    
+    </topic>
+    
+
+</aiml>
